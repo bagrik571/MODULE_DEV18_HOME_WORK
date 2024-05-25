@@ -3,6 +3,7 @@ package com.example.module_dev18_home_work.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,12 +14,13 @@ import java.util.List;
 @Data
 @Entity
 @NoArgsConstructor
-@Builder
+@AllArgsConstructor
 @Table(name = "users")
 public class User {
     @Id
+    @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long userId;
 
     @Column(name = "username")
     @NotNull
@@ -52,8 +54,8 @@ public class User {
     private List<Note> notes = new ArrayList<>();
 
 
-    public User(Long id) {
-        this.id = id;
+    public User(Long userId) {
+        this.userId = userId;
     }
 
 

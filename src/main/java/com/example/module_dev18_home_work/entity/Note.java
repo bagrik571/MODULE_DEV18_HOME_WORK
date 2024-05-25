@@ -1,22 +1,29 @@
 package com.example.module_dev18_home_work.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
+import java.time.LocalDateTime;
+
 @Entity
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "note")
 public class Note {
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
+    @JsonIgnore
     private User user;
 
     @Column
@@ -27,4 +34,9 @@ public class Note {
     @Column
     @NotNull
     private String content;
+
+    @Column(name = "created_at")
+    @NotNull
+    private LocalDateTime created_at = LocalDateTime.now();
 }
+
